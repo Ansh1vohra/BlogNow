@@ -1,7 +1,6 @@
 "use client";
 
 import styles from './BlogList.module.css';
-import './BlogList.module.css';
 import Link from 'next/link';
 import { useState } from 'react';
 import Image from 'next/image';
@@ -16,17 +15,21 @@ export default function BlogList({ posts }) {
 
   return (
     <div className="d-flex flex-column gap-4 align-items-center container">
-        <input
-          type="text"
-          placeholder="Search posts"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className={styles.inpField} id="exampleFormControlInput1"
-        />
+      <input
+        type="text"
+        placeholder="Search posts"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className={styles.inpField}
+        id="exampleFormControlInput1"
+      />
       <div className={styles.blogContainer}>
-        {filteredPosts.map(({ id, title, date, summary }) => (
-          <div key={id} >
-            <Link href={`posts/${id}`} className={styles.blogItem}>
+        {filteredPosts.length === 0 ? (
+          <h4 className={styles.noResults}>Blog not found</h4>
+        ) : (
+          filteredPosts.map(({ id, title, date, summary }) => (
+            <div key={id}>
+              <Link href={`posts/${id}`} className={styles.blogItem}>
                 <div className={styles.blogCard}>
                   <Image src={newImg} className={styles.blogImage} alt="blog" />
                   <div className="card-body p-3">
@@ -35,9 +38,10 @@ export default function BlogList({ posts }) {
                     <p className="card-text">{date}</p>
                   </div>
                 </div>
-            </Link>
-          </div>
-        ))}
+              </Link>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
