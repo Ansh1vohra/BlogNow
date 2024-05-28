@@ -1,0 +1,17 @@
+.blogContent{
+    padding: 3rem;
+    min-height:90vh;
+    width: 80%;
+    font-size:large;
+    text-align:justify;
+}
+.shareContainer > * {
+    cursor: pointer;
+    margin:0.5rem;
+  }
+
+@media  screen and (max-width:768px) {
+    .blogContent{
+        width:100%;
+    }
+}
